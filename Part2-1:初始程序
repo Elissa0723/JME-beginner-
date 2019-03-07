@@ -17,6 +17,7 @@ public class Main extends SimpleApplication {
     public static void main(String[] args) {
         //初始化
         Main app = new Main();
+        //打开application window，开始渲染scene
         app.start();
     }
 
@@ -24,8 +25,8 @@ public class Main extends SimpleApplication {
     public void simpleInitApp() {
         //定义一个在每个坐标轴长度都为1的2*2*2的正方体
         //在这里如果不明确写，则默认初始位置为0，完整版如下
-        //Box	b	=	new	Box(Vector3f.ZERO,	1,	1,	1);
-        Box b = new Box(1, 1, 1);
+        //Box b=new Box(Vector3f.ZERO,1,1,1);
+        Box b = new Box(1,1,1);
         //为b这个形状创立Geometry
         Geometry geom = new Geometry("Box", b);
         

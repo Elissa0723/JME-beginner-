@@ -13,7 +13,7 @@ public	class	Main	extends	SimpleApplication	{
         /**	initialize	the	scene	here	*/				
         public	void	simpleInitApp()	{							
         //	create	a	cube-shaped	mesh							
-        Box	b	=	new	Box(Vector3f.ZERO,	1,	1,	1);											
+        Box b	=	new	Box(Vector3f.ZERO,	1,	1,	1);											
         //	create	an	object	from	the	mesh							
         Geometry	geom	=	new	Geometry("Box",	b);					
 							

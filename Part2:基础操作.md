@@ -6,7 +6,8 @@ https://github.com/Elissa0723/JME-beginner-/blob/master/Part2-1:%E5%88%9D%E5%A7%
 改变形状位置有两种方法：
 + geom.move(3.0f,-2.0f,1.0f);  
 这里的f指的是float  
-<b>相对位置</b>：把当前位置改变(3,-2,1)
+<b>相对位置</b>：把当前位置改变(3,-2,1)  
+<b>主要适用于在loop中改变物体位置</b>  
 + geom.setLocalTranslation(3.0f,-2.0f,1.0f);   
 <b>绝对位置</b>：定位到(3,-2,1)    
 

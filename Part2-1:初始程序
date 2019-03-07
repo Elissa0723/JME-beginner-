@@ -1,0 +1,50 @@
+package mygame;
+
+import com.jme3.app.SimpleApplication;
+import com.jme3.material.Material;
+import com.jme3.math.ColorRGBA;
+import com.jme3.renderer.RenderManager;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.shape.Box;
+
+/**
+ * This is the Main Class of your Game. You should only do initialization here.
+ * Move your Logic into AppStates or Controls
+ * @author normenhansen
+ */
+public class Main extends SimpleApplication {
+
+    public static void main(String[] args) {
+        //初始化
+        Main app = new Main();
+        app.start();
+    }
+
+    @Override
+    public void simpleInitApp() {
+        //定义一个在每个坐标轴长度都为1的2*2*2的正方体
+        //在这里如果不明确写，则默认初始位置为0，完整版如下
+        //Box	b	=	new	Box(Vector3f.ZERO,	1,	1,	1);
+        Box b = new Box(1, 1, 1);
+        //为b这个形状创立Geometry
+        Geometry geom = new Geometry("Box", b);
+        
+        //定义材质，这里是Unshaded，后面会考虑light的情况
+        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        //定义颜色
+        mat.setColor("Color", ColorRGBA.Blue);
+        geom.setMaterial(mat);
+        把geom加到rootNode上，后面会提到接到guinode的情况
+        rootNode.attachChild(geom);
+    }
+
+    @Override
+    public void simpleUpdate(float tpf) {
+        //TODO: add update code
+    }
+
+    @Override
+    public void simpleRender(RenderManager rm) {
+        //TODO: add render code
+    }
+}

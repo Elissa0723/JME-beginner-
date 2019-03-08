@@ -1,0 +1,90 @@
+package mygame;
+
+import com.jme3.app.SimpleApplication;
+import com.jme3.input.*;
+import com.jme3.input.controls.*;
+import com.jme3.material.Material;
+import com.jme3.math.ColorRGBA;
+
+import com.jme3.renderer.RenderManager;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.shape.Box;
+
+/**
+ *
+ * @author admin
+ */
+public class Main extends SimpleApplication{
+    
+    //定义TRIGGER
+    //定义空格键为触发器
+    private final static Trigger TRIGGER_COLOR = new KeyTrigger(KeyInput.KEY_SPACE); 
+    //定义鼠标左键为触发器
+    private final static Trigger TRIGGER_ROTATE	= new MouseButtonTrigger(MouseInput.BUTTON_LEFT); 
+    //定义c键为触发器
+    private final static Trigger TRIGGER_COLOR2 = new KeyTrigger(KeyInput.KEY_C);
+    
+    //定义颜色映射
+    private final static String MAPPING_COLOR = "Toggle Color";
+    //定义旋转映射
+    private final static String MAPPING_ROTATE = "Rotate";
+    
+    private Geometry geom;
+   
+    public static void main(String[] args) {        
+        Main app = new Main();
+        app.start();    
+    }
+    //定义监听器方法
+    private ActionListener actionListener = new ActionListener(){
+        @Override
+        public void onAction(String name, boolean isPressed, float tpf){
+                if(name.equals(MAPPING_COLOR)&& !isPressed){
+                    //如果确认按键，则随机变换颜色
+                    geom.getMaterial().setColor("Color",ColorRGBA.randomColor());
+                }
+            }
+    } ;
+    
+    private AnalogListener analogListener = new AnalogListener(){
+        @Override
+        public void onAnalog(String name, float intensity, float tpf){
+                if(name.equals(MAPPING_ROTATE)){
+                //如果确认按键，则沿y轴旋转
+                    geom.rotate(0,intensity,0);
+                }
+            }
+    } ;
+    
+    
+    
+    @Override
+    public void simpleInitApp() {
+        //将触发器和映射函数相连
+        inputManager.addMapping(MAPPING_COLOR,TRIGGER_COLOR,TRIGGER_COLOR2);
+        inputManager.addMapping(MAPPING_ROTATE,TRIGGER_ROTATE);
+        //将监听器方法连到映射
+        inputManager.addListener(actionListener, new String[]{MAPPING_COLOR});
+        inputManager.addListener(analogListener, new String[]{MAPPING_ROTATE});
+        
+        Box mesh = new Box(1, 1, 1);       
+        geom = new Geometry("Box", mesh);
+        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        mat.setColor("Color", ColorRGBA.Blue);
+        geom.setMaterial(mat);
+        rootNode.attachChild(geom);
+    }   
+    
+    
+    @Override
+    public void simpleUpdate(float tpf) {
+        //TODO: add update code
+    }
+
+    @Override
+    public void simpleRender(RenderManager rm) {
+        //TODO: add render code
+    }
+}
+  
+    

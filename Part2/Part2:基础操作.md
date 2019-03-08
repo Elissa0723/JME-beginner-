@@ -22,5 +22,17 @@ https://github.com/Elissa0723/JME-beginner-/blob/master/Part2/Part2-2:%E6%94%B9%
 + geom.setLocalScale(0.5f);  
 <b>绝对大小</b>  
 
-### 旋转  
-选择物体
+### 旋转物体  
+如何将物体旋转到指定的角度？  
+这里用到了函数 FastMath.DEG_TO_RAD, 可以将度数转成弧度（因为程序默认计算的是弧度）  
+旋转物体45度：  
+float r = FastMath.DEG_TO_RAD*45f;  
+geom.rotate(0,r,0);  
+
+![Not found](https://github.com/Elissa0723/Image/blob/master/1-5.jpg?raw=true)
+
+沿x，y，z轴分别的旋转图像：  
+![Not found](https://github.com/Elissa0723/Image/blob/master/1-6.jpg?raw=true)
+
+代码+注释：  
+https://github.com/Elissa0723/JME-beginner-/blob/master/Part2/Part2-3:%E6%97%8B%E8%BD%AC%E7%89%A9%E4%BD%93  

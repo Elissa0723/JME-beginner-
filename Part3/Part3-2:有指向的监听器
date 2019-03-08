@@ -1,0 +1,115 @@
+package mygame;
+
+import com.jme3.app.SimpleApplication;
+import com.jme3.collision.CollisionResults;
+import com.jme3.input.*;
+import com.jme3.input.controls.*;
+import com.jme3.material.Material;
+import com.jme3.math.ColorRGBA;
+import com.jme3.math.Ray;
+import com.jme3.math.Vector3f;
+
+import com.jme3.renderer.RenderManager;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.shape.Box;
+
+/**
+ *
+ * @author admin
+ */
+public class Main extends SimpleApplication{
+    //定义trigger和映射关系
+    private final static Trigger TRIGGER_ROTATE	= new MouseButtonTrigger(MouseInput.BUTTON_LEFT); 
+    private final static String MAPPING_ROTATE = "Rotate";
+    
+    Geometry geom;
+    private static Box mesh = new Box(Vector3f.ZERO, 1,1,1);   
+   
+    public static void main(String[] args) {        
+        Main app = new Main();
+        app.start();         
+    }
+    
+    private final AnalogListener analogListener = new AnalogListener(){
+        @Override
+        public void onAnalog(String name, float intensity, float tpf){
+                if(name.equals(MAPPING_ROTATE)){
+                    //创建result列表
+                    CollisionResults results = new CollisionResults(); 
+                    //我们直接从相机方向前方的摄像机位置瞄准一条不可见的线，用来后面计算cube位置
+                    Ray ray = new Ray(cam.getLocation(), cam.getDirection()); 
+                    //将这个结果附加到rootNode
+                    rootNode.collideWith(ray, results); 
+                    //我们计算此视线与附加到rootNode对象的所有几何之间的交点，并在结果列表中收集它们。
+                    for(int i = 0;i<results.size();i++){
+                        float dist = results.getCollision(i).getDistance();
+                        Vector3f pt = results.getCollision(i).getContactPoint();
+                        String target = results.getCollision(i).getGeometry().getName();
+                        //打印中间结果，这样我们就可以看到正在发生的事情
+                        //对于每次击中，我们知道相机的距离，撞击点和几何形状
+                        System.out.println("Selection:	#"+i+":"+target+"at"+pt+","+dist+"WUaway."); 
+                    } 
+                    if(results.size()>0){
+                        Geometry target = results.getClosestCollision().getGeometry();
+                        //如果击中红色cube
+                        if(target.getName().equals("Red Cube")){
+                        target.rotate(0,-intensity,0);
+                        }
+                        //如果击中蓝色cube
+                        if(target.getName().equals("Blue Cube")){
+                        target.rotate(0,intensity,0);
+                        }
+                        
+                    }
+                    else{
+                        System.out.println("Selection: Nothing");
+                    }           
+                }
+            }
+    } ;
+       
+    @Override
+    public void simpleInitApp() {
+
+        inputManager.addMapping(MAPPING_ROTATE,TRIGGER_ROTATE);
+        inputManager.addListener(analogListener, new String[]{MAPPING_ROTATE});
+        
+        //我们在后面定义了myBox的方法以便快速创建cube
+        myBox("Red Cube",new Vector3f(0,1.5f,0),ColorRGBA.Red);
+        myBox("Blue Cube",new Vector3f(0,-1.5f,0),ColorRGBA.Blue);
+        
+        rootNode.attachChild(myBox("Red Cube",new Vector3f(0,1.5f,0),ColorRGBA.Red));
+        rootNode.attachChild(myBox("Blue Cube",new Vector3f(0,-1.5f,0),ColorRGBA.Blue));
+        
+        attachCenterMark();          
+    }   
+    //建立瞄准点
+    private void attachCenterMark(){
+        Geometry c = myBox("center mark",Vector3f.ZERO,ColorRGBA.White);
+        c.scale(4);
+        //定义在视野中间
+        c.setLocalTranslation(settings.getWidth()/2,settings.getHeight()/2,0);
+        //guiNode意味着将这个cube接到2维
+        guiNode.attachChild(c);
+    }
+    //定义快速创建cube的方法
+    public Geometry myBox(String name, Vector3f loc, ColorRGBA color){
+        geom = new Geometry(name, mesh);
+        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        mat.setColor("Color", color);
+        geom.setMaterial(mat);
+        geom.setLocalTranslation(loc);
+        return geom;
+    }
+    
+    @Override
+    public void simpleUpdate(float tpf) {
+        //TODO: add update code
+    }
+
+    @Override
+    public void simpleRender(RenderManager rm) {
+        //TODO: add render code
+    }
+}
+  

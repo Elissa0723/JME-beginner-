@@ -35,4 +35,18 @@ geom.rotate(0,r,0);
 ![Not found](https://github.com/Elissa0723/Image/blob/master/1-6.jpg?raw=true)
 
 代码+注释：  
-https://github.com/Elissa0723/JME-beginner-/blob/master/Part2/Part2-3:%E6%97%8B%E8%BD%AC%E7%89%A9%E4%BD%93  
+https://github.com/Elissa0723/JME-beginner-/blob/master/Part2/Part2-3:%E6%97%8B%E8%BD%AC%E7%89%A9%E4%BD%93    
+
+### 让一些物体一起动起来！  
+有的时候我们给物体一个一个加效果太过复杂，则可以用到分级node的方法  
+之前的总结有介绍过，将rootNode.attachChild(geom);这句话替换为：  
+```
+Node pivot = new	Node("pivot	node"); 
+pivot.attachChild(geom); 
+pivot.attachChild(geom2); 
+pivot.rotate(00,	0,	FastMath.DEG_TO_RAD	*	45); 
+rootNode.attachChild(pivot); 
+```
+这样直接对pivot节点进行操作，可以使geom和geom2同时移动  
+
+

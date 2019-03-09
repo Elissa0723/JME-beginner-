@@ -14,3 +14,9 @@ https://github.com/Elissa0723/JME-beginner-/blob/master/Part3/Part3-1:%E7%9B%91%
 代码+注释：  
 https://github.com/Elissa0723/JME-beginner-/blob/master/Part3/Part3-2:%E6%9C%89%E6%8C%87%E5%90%91%E7%9A%84%E7%9B%91%E5%90%AC%E5%99%A8
 
+### 鼠标&监控器  
+上面做出了如何把物体对准瞄准器，然后让指定object移动，但是往往我们在实际情况中，并不是把object对准瞄准器，而是用鼠标去点击object操作
+本节代码主要介绍如何把瞄准器改成鼠标，针对每个cube进行旋转  
+
+代码+注释：  
+https://github.com/Elissa0723/JME-beginner-/blob/master/Part3/Part3-3:%E9%BC%A0%E6%A0%87%26%E7%9B%91%E6%8E%A7%E5%99%A8 

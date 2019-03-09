@@ -51,12 +51,13 @@ public class Main extends SimpleApplication{
         public void onAnalog(String name, float intensity, float tpf){
                 if(name.equals(MAPPING_ROTATE)){
                     CollisionResults results = new CollisionResults(); 
+                    //获取光标位置的2d坐标
                     Vector2f click2d = inputManager.getCursorPosition();
-                    
+                    //将2d坐标转为3d坐标
                     Vector3f click3d = cam.getWorldCoordinates(new Vector2f(click2d.getX(),click2d.getY()),0f);
-                    
                     Vector3f dir = cam.getWorldCoordinates(new Vector2f(click2d.getX(),	click2d.getY()),1f).subtractLocal(click3d);
-                    
+                    //从鼠标这一点投射光线
+                    //和之前的算法类似
                     Ray	ray=new	Ray(click3d,dir); 
                     rootNode.collideWith(ray,results); 
                     
@@ -77,7 +78,7 @@ public class Main extends SimpleApplication{
       
     @Override
     public void simpleInitApp() {
-        
+        //使鼠标可见
         flyCam.setDragToRotate(true); 
         inputManager.setCursorVisible(true);
       

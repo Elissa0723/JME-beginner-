@@ -26,3 +26,16 @@ inputManager.setCursorVisible(true);
 
 距离算法部分代码+注释：  
 https://github.com/Elissa0723/JME-beginner-/blob/master/Part3/Part3-3:%E9%BC%A0%E6%A0%87%26%E7%9B%91%E6%8E%A7%E5%99%A8 
+
+### 方块追随者  
+这部分介绍了一个神奇的算法，如何追随一个方块，当然，这里追随的意义是当相机举例10wu以上，立方体就会远离相机
+这里我们指定了一个方块，并且随机创造了其他40个方块来凸显这个指定方块运动的轨迹  
+![Not Found](https://github.com/Elissa0723/Image/blob/master/3-1.jpg?raw=true) 
+为了达到目标，我们需要在simpleUpdate()中添加判断代码：  
+```
+if(cam.getLocation().distance(scaredCube.getLocalTranslation())	<10)	
+                {scaredCube.move(cam.getDirection());} 
+```
+如果指定方块和相机的距离小于10wu，则把方块远离  
+代码+注释：  
+https://github.com/Elissa0723/JME-beginner-/blob/master/Part3/Part3-4:%20%E6%96%B9%E5%9D%97%E8%BF%BD%E9%9A%8F%E8%80%85

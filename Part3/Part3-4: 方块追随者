@@ -30,13 +30,17 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
+        //创造40个随机位置随机颜色的cube
         makeCubes(40);
+        //创建我们要追随的方块
         scaredCube=myBox("Scared Cube", Vector3f.ZERO, ColorRGBA.White);
         rootNode.attachChild(scaredCube); 
 
         
     }
-    
+    //构建单个cube的方法
+    //可以理解为封装了basic方法
+    //输入cube名字，cube位置，cube颜色
     public Geometry myBox(String name, Vector3f loc, ColorRGBA color){
         geom = new Geometry(name, mesh);
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -45,15 +49,17 @@ public class Main extends SimpleApplication {
         geom.setLocalTranslation(loc);
         return geom;
     }
-    
-    private void makeCubes(int	number)	{
+    //批量构建随机颜色随机位置的cube，输入为cube的数量
+    private void makeCubes(int number)	{
         for(int	i=0;i<number;i++){	
-            //randomize 3D coordinates				
+            //randomize 3D coordinates	
+            //构建随机位置
             Vector3f loc=new Vector3f(		
                     FastMath.nextRandomInt(-20,	20),			
                     FastMath.nextRandomInt(-20,	20),
                     FastMath.nextRandomInt(-20,	20));
-            rootNode.attachChild(			
+            rootNode.attachChild(
+                    //调用mybox，构建随机颜色的cube
                     myBox("Cube"+i,loc,ColorRGBA.randomColor()));
         } 
     } 
@@ -61,8 +67,7 @@ public class Main extends SimpleApplication {
 
     @Override
     public void simpleUpdate(float tpf) {
-        	//System.out.println("Distance:"+	
-                        //cam.getLocation().distance(scaredCube.getLocalTranslation())); 
+            //当相机和追随方块的位置小于10wu时，移动cube远离相机
         	if(cam.getLocation().distance(scaredCube.getLocalTranslation())	<10)	
                 {scaredCube.move(cam.getDirection());} 
     }

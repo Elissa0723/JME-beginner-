@@ -30,7 +30,7 @@ https://github.com/Elissa0723/JME-beginner-/blob/master/Part3/Part3-3:%E9%BC%A0%
 ### 方块追随者  
 这部分介绍了一个神奇的算法，如何追随一个方块，当然，这里追随的意义是当相机举例10wu以上，立方体就会远离相机
 这里我们指定了一个方块，并且随机创造了其他40个方块来凸显这个指定方块运动的轨迹  
-![Not Found](https://github.com/Elissa0723/Image/blob/master/3-1.jpg?raw=true) 
+![Not Found](https://github.com/Elissa0723/Image/blob/master/3-1.jpg?raw=true)   
 为了达到目标，我们需要在simpleUpdate()中添加判断代码：  
 ```
 if(cam.getLocation().distance(scaredCube.getLocalTranslation())	<10)	
